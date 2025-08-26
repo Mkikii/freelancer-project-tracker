@@ -1,11 +1,10 @@
-# 💼 Freelancer Project & Time Tracker
+#  Freelancer Project & Time Tracker
 
-**Created by: Maureen W Karimi**  
-**Phase 3 Python CLI Project - Moringa School**
+**Created by: Maureen W Karimi** 
 
 A simple command-line application that helps me manage my freelance business by tracking clients, projects, and time worked. Built with Python, SQLAlchemy ORM, and Click CLI framework.
 
-## 🎯 Project Purpose
+## Project Purpose
 
 As a student learning to freelance, I needed a simple tool to:
 - Keep track of my clients and their contact information
@@ -13,32 +12,32 @@ As a student learning to freelance, I needed a simple tool to:
 - Log time I spend working on each project
 - Generate reports to see how much I'm earning
 
-## ✨ Features
+##  Features
 
-### 👥 Client Management
+###  Client Management
 - Add new clients with contact details and hourly rates
 - View all clients with earnings summary
 - Track which clients are most profitable
 
-### 🚀 Project Management
+###  Project Management
 - Create projects linked to specific clients
 - Set project-specific hourly rates
 - Track project status (active, completed, paused)
 - View project earnings and hours worked
 
-### ⏰ Time Tracking
+###  Time Tracking
 - Log work sessions with detailed descriptions
 - Categorize work by task type (coding, meetings, design)
 - View recent work history
 - Automatic earnings calculation
 
-### 📊 Business Reports
+###  Business Reports
 - Earnings breakdown by client
 - Work summary for any time period
 - Overall business statistics
 - Average hourly rate calculations
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Python 3.8+** - Main programming language
 - **SQLAlchemy** - Object-Relational Mapping (ORM)
@@ -46,7 +45,7 @@ As a student learning to freelance, I needed a simple tool to:
 - **SQLite** - Database for storing data
 - **Tabulate** - Beautiful table formatting
 
-## 📋 Requirements Met
+##  Requirements Met
 
 ✅ **CLI Interface** - Professional command-line interface with organized command groups  
 ✅ **ORM Functions** - SQLAlchemy models with CRUD operations  
@@ -55,7 +54,7 @@ As a student learning to freelance, I needed a simple tool to:
 ✅ **CLI Best Practices** - Clear commands, help text, error handling  
 ✅ **OOP Best Practices** - Proper class design, methods, relationships  
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
@@ -81,7 +80,7 @@ pip install -r requirements.txt
 python main.py --help
 ```
 
-## 💡 Usage Examples
+##  Usage Examples
 
 ### Getting Started
 ```bash
@@ -122,7 +121,7 @@ python main.py time recent
 python main.py report earnings --days 30
 ```
 
-## 📁 Project Structure
+##  Project Structure
 ```
 freelancer-project-tracker/
 │
@@ -170,7 +169,7 @@ freelancer-project-tracker/
 - `python main.py report earnings --days 7` - Weekly earnings report
 - `python main.py report summary` - Overall business summary
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 Through building this project, I learned:
 - **ORM Design**: Creating related database models with SQLAlchemy
@@ -180,7 +179,7 @@ Through building this project, I learned:
 - **Error Handling**: Managing database transactions and user input
 - **Code Organization**: Structuring a multi-file Python application
 
-## 🤝 Personal Touch
+##  Personal Touch
 
 This project reflects my journey as a student learning both programming and freelancing. I added personal touches like:
 - Encouraging messages ("Add your first client!", "You earned $X!")
@@ -188,14 +187,14 @@ This project reflects my journey as a student learning both programming and free
 - Practical features I actually need as a freelancer
 - Clear visual feedback with emojis and formatting
 
-## 🐛 Known Limitations
+##  Known Limitations
 
 - No user authentication (single-user application)
 - SQLite database (suitable for personal use)
 - No GUI (command-line only)
 - Basic reporting (no charts or graphs)
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 If I had more time, I would add:
 - CSV export for accounting software
@@ -204,7 +203,7 @@ If I had more time, I would add:
 - More advanced reporting
 - Multi-currency support
 
-## 📝 Author Notes
+##  Author Notes
 
 Created as part of Phase 3 Python CLI project at Moringa School. This represents my learning journey in Python, databases, and software design. The project meets all requirements while being practical for real-world use.
 

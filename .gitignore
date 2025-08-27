@@ -1,17 +1,24 @@
-# Virtual environment
-freelancer_env/
-venv/
-env/
-
-# Database
-*.db
-freelancer_tracker.db
-
-# Python cache
+# Python
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Database (optional - you might want to commit the .db file to show data)
+# *.db
+# *.sqlite
+# *.sqlite3
 
 # IDE
-.vscode/settings.json
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db

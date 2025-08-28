@@ -1,184 +1,141 @@
-#  Freelancer Project & Time Tracker
+# 💼 Freelancer Project & Time Tracker
 
-**Created by: Maureen W Karimi**  
-**Phase 3 Python CLI Project - Moringa School**
+A comprehensive command-line application for freelancers to track clients, projects, and time worked. Built with Python, SQLAlchemy ORM, and Click for the Phase 3 project at Moringa School.
 
-A simple command-line application that helps me manage my freelance business by tracking clients, projects, and time worked. Built with Python, SQLAlchemy, and Click.
+## ✨ Features
 
-##  Project Overview
+- **👥 Client Management**: Add, view, update, and delete clients
+- **📁 Project Tracking**: Manage projects with hourly rates and statuses
+- **⏰ Time Logging**: Track time worked on projects with descriptions
+- **🏷️ Category System**: Organize projects by categories
+- **📊 Reporting**: Generate business summaries and detailed reports
+- **🛠️ Database Tools**: Seed with sample data and debug functionality
 
-This CLI application solves real freelancer problems:
--  **Client Management**: Store client information and contact details
--  **Project Tracking**: Organize work by projects with different hourly rates
--  **Time Logging**: Track hours worked with detailed descriptions
--  **Earnings Reports**: See how much money you've made
-- **Business Analytics**: Get insights into your freelance business
+## 🛠️ Technologies Used
 
-## 🛠Technologies Used
+- Python 3.10+
+- SQLAlchemy ORM
+- Click for CLI interface
+- Tabulate for formatted tables
+- Faker for sample data generation
 
-- **Python 3.8+** - Programming language
-- **SQLAlchemy** - ORM for database operations
-- **Click** - CLI framework for beautiful command-line interfaces
-- **Tabulate** - Pretty table formatting
-- **SQLite** - Database (no setup required!)
+## 📦 Installation
 
-##  Requirements Met
-
-✅ **CLI Interface** - Professional Click-based interface with help text  
-✅ **ORM Functions** - Full CRUD operations using SQLAlchemy  
-✅ **Object Model** - 4 classes with 4+ attributes each  
-✅ **One-to-Many Relationships** - Client→Projects, Project→TimeEntries  
-✅ **CLI Best Practices** - Clear commands, error handling, user-friendly output  
-✅ **OOP Best Practices** - Methods, relationships, proper encapsulation  
-
-## 🏗 Database Schema
-
-### Models Overview:
-1. **Client** - Stores client information (name, email, company, phone)
-2. **Project** - Tracks projects (name, hourly rate, description, status)
-3. **TimeEntry** - Logs work sessions (hours, description, date)
-4. **Category** - Organizes work types (name, description, color)
-
-### Relationships:
-- One Client can have Many Projects
-- One Project can have Many TimeEntries
-
-##  Installation & Setup
-
-1. **Clone the repository**:
-   ```bash
-   git clone <your-repo-url>
-   cd freelancer-tracker
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   pip install sqlalchemy click tabulate
-   ```
-
-3. **Initialize the database**:
-   ```bash
-   python models.py
-   ```
-
-4. **Start using the app**:
-   ```bash
-   python cli.py --help
-   ```
-
-##  How to Use
-
-### 1. Add Your First Client
+1. Clone the repository:
 ```bash
+git clone <your-repo-url>
+cd freelancer-tracker
+pipenv install
+pipenv shell
+python cli.py
+# Client management
 python cli.py client add
-# Follow the prompts to enter client information
-```
+python cli.py client list
 
-### 2. Create a Project
-```bash
+# Project management
 python cli.py project add
-# Link it to a client and set your hourly rate
-```
+python cli.py project list
 
-### 3. Log Work Time
-```bash
+# Time tracking
 python cli.py time log
-# Track hours worked with descriptions
-```
+python cli.py time recent
 
-### 4. View Reports
+# Reports
+python cli.py summary
+python cli.py report
+
+# Database tools
+python cli.py seed
+python cli.py debug
+Interactive Menu Interface
+Run the interactive menu:
+
+bash
+python main.py
+🗃️ Database Schema
+The application uses SQLite by default with the following tables:
+
+clients: Store client information
+
+projects: Track projects with hourly rates
+
+time_entries: Record work sessions with hours and descriptions
+
+categories: Organize projects by type
+
+📊 Example Usage
+Add a client:
+
+text
+python cli.py client add --name "Acme Corp" --email "contact@acme.com" --company "Acme Corporation" --phone "555-1234"
+Create a project:
+
+text
+python cli.py project add --name "Website Redesign" --client-id 1 --rate 50.0 --description "Redesign of main website"
+Log time:
+
+text
+python cli.py time log --project-id 1 --hours 3.5 --description "Designed homepage layout" --task-type "design"
+Generate report:
+
+text
+python cli.py report --days 30
+🧪 Testing
+Seed the database with sample data:
+
+bash
+python cli.py seed
+Debug database contents:
+
+bash
+python cli.py debug
+📝 Project Structure
+text
+freelancer-tracker/
+├── Pipfile               # Dependencies and virtual environment config
+├── Pipfile.lock         # Locked dependencies
+├── README.md            # This file
+├── cli.py              # Command-line interface
+├── crud.py             # Database operations (Create, Read, Update, Delete)
+├── debug.py            # Database debugging utilities
+├── main.py             # Interactive menu interface
+├── models.py           # SQLAlchemy database models
+└── seed.py             # Database seeding with sample data
+👩‍💻 Author
+Maureen W Karimi
+Moringa School - Phase 3 Python CLI Project
+
+📄 License
+This project is created for educational purposes as part of the Moringa School curriculum.
+
+text
+
+## Setup Instructions
+
+1. Create the project directory and navigate to it:
 ```bash
-python cli.py summary           # Business overview
-python cli.py client list       # All clients
-python cli.py project list      # All projects  
-python cli.py time recent       # Recent time entries
-```
+mkdir freelancer-tracker
+cd freelancer-tracker
+Create and activate a virtual environment with Pipenv:
 
-## 📸 Example Usage
+bash
+pipenv install
+pipenv shell
+Create all the files with the code provided above.
 
-```bash
-# Add a client
-$ python cli.py client add
-Client name: Google Inc
-Email address: contact@google.com
-Company (optional): Google
-Phone (optional): +1-650-253-0000
-Client 'Google Inc' added successfully!
+Initialize the database:
 
-# Create a project
-$ python cli.py project add
-Project name: Website Redesign
-Client ID: 1
-Hourly rate ($) [25.0]: 75.0
-Description (optional): Redesign company website with modern UI
- Project 'Website Redesign' created for Google Inc!
-💰 Hourly rate: $75.00
+bash
+python models.py
+Seed the database with sample data:
 
-# Log time worked
-$ python cli.py time log
-Project ID: 1
-Hours worked: 3.5
-What did you work on?: Implemented responsive navigation and hero section
-Task type (optional): coding
-✅ Time logged successfully!
-📊 3.5 hours on 'Website Redesign'
-💰 You earned $262.50!
+bash
+python seed.py
+Run the application:
 
-# View summary
-$ python cli.py summary
-📈 FREELANCE BUSINESS SUMMARY
-👥 Total Clients: 3
-📁 Total Projects: 5
-⏰ Total Hours Worked: 42.5
-💰 Total Earnings: $1,837.50
-```
+bash
+# For the command-line interface
+python cli.py --help
 
-##  Features That Make This Special
-
-- **Beginner-Friendly**: Clean code with helpful comments
-- **Emoji Usage**: Makes the CLI fun and visually appealing  
-- **Error Handling**: Graceful error messages and tips
-- **Real-World Practical**: Actually useful for freelancers
-- **Beautiful Tables**: Professional output formatting
-- **Encouraging Messages**: Positive feedback on actions
-
-##  Advanced Features
-
-- **Flexible Hourly Rates**: Different rates per project
-- **Detailed Time Tracking**: Log what you worked on
-- **Business Analytics**: See your earning trends
-- **Client Relationship**: Track total earnings per client
-- **Status Management**: Mark projects as active/completed
-
-##  Learning Objectives Achieved
-
-1. **Database Design** - Proper relationships and constraints
-2. **ORM Usage** - SQLAlchemy for all database operations
-3. **CLI Development** - Click framework with proper structure
-4. **Object-Oriented Programming** - Classes, methods, inheritance
-5. **Error Handling** - Try/except blocks and user feedback
-6. **Code Organization** - Separate models and CLI logic
-
-
-##  Future Enhancements
-
-- Export data to CSV/Excel
-- Time tracking with start/stop timer
-- Invoice generation
-- Data visualization with charts
-- Multi-currency support
-- Backup and restore features
-
-##  About the Developer
-
-**Maureen W Karimi**  
-Moringa School - Phase 3 Student  
-Passionate about building practical solutions with Python!
-
-## 📄 License
-
-This project is created for educational purposes as part of Moringa School's Python curriculum.
-
----
-
-*"Building practical solutions, one commit at a time!"* 🚀
+# For the interactive menu interface
+python main.py

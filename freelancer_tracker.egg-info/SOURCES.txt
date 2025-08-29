@@ -1,0 +1,8 @@
+README.md
+setup.py
+freelancer_tracker.egg-info/PKG-INFO
+freelancer_tracker.egg-info/SOURCES.txt
+freelancer_tracker.egg-info/dependency_links.txt
+freelancer_tracker.egg-info/entry_points.txt
+freelancer_tracker.egg-info/requires.txt
+freelancer_tracker.egg-info/top_level.txt

@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 def add_client(name, email, company=None, phone=None):
     session = get_session()
     try:
-        existing_client = session.query(Client).filter_by(email=email).first()
+        existing_client = session.query(Client).filter_by(email=email, is_deleted=False).first()
         if existing_client:
             return False, f"Client with email {email} already exists!"
         
@@ -26,7 +26,7 @@ def add_client(name, email, company=None, phone=None):
 def get_all_clients():
     session = get_session()
     try:
-        clients = session.query(Client).all()
+        clients = session.query(Client).filter_by(is_deleted=False).all()
         return clients
     except Exception as e:
         print(f"Error fetching clients: {str(e)}")
@@ -37,7 +37,7 @@ def get_all_clients():
 def get_client_by_id(client_id):
     session = get_session()
     try:
-        client = session.query(Client).filter_by(id=client_id).first()
+        client = session.query(Client).filter_by(id=client_id, is_deleted=False).first()
         return client
     except Exception as e:
         print(f"Error fetching client: {str(e)}")
@@ -48,7 +48,7 @@ def get_client_by_id(client_id):
 def update_client(client_id, **kwargs):
     session = get_session()
     try:
-        client = session.query(Client).filter_by(id=client_id).first()
+        client = session.query(Client).filter_by(id=client_id, is_deleted=False).first()
         if not client:
             return False, f"Client with ID {client_id} not found!"
         
@@ -68,11 +68,13 @@ def update_client(client_id, **kwargs):
 def delete_client(client_id):
     session = get_session()
     try:
-        client = session.query(Client).filter_by(id=client_id).first()
+        client = session.query(Client).filter_by(id=client_id, is_deleted=False).first()
         if not client:
             return False, f"Client with ID {client_id} not found!"
         
-        session.delete(client)
+        # Soft delete instead of hard delete
+        client.is_deleted = True
+        client.updated_at = datetime.now()
         session.commit()
         return True, f"Client '{client.name}' deleted successfully!"
         
@@ -85,7 +87,7 @@ def delete_client(client_id):
 def add_project(name, client_id, hourly_rate, description=None, category_id=None):
     session = get_session()
     try:
-        client = session.query(Client).filter_by(id=client_id).first()
+        client = session.query(Client).filter_by(id=client_id, is_deleted=False).first()
         if not client:
             return False, f"Client with ID {client_id} not found!"
         
@@ -106,7 +108,7 @@ def add_project(name, client_id, hourly_rate, description=None, category_id=None
 def get_all_projects():
     session = get_session()
     try:
-        projects = session.query(Project).all()
+        projects = session.query(Project).filter_by(is_deleted=False).all()
         return projects
     except Exception as e:
         print(f"Error fetching projects: {str(e)}")
@@ -117,7 +119,7 @@ def get_all_projects():
 def get_project_by_id(project_id):
     session = get_session()
     try:
-        project = session.query(Project).filter_by(id=project_id).first()
+        project = session.query(Project).filter_by(id=project_id, is_deleted=False).first()
         return project
     except Exception as e:
         print(f"Error fetching project: {str(e)}")
@@ -128,11 +130,12 @@ def get_project_by_id(project_id):
 def update_project_status(project_id, status):
     session = get_session()
     try:
-        project = session.query(Project).filter_by(id=project_id).first()
+        project = session.query(Project).filter_by(id=project_id, is_deleted=False).first()
         if not project:
             return False, f"Project with ID {project_id} not found!"
         
         project.status = status
+        project.updated_at = datetime.now()
         session.commit()
         return True, f"Project status updated to '{status}'"
         
@@ -145,11 +148,13 @@ def update_project_status(project_id, status):
 def delete_project(project_id):
     session = get_session()
     try:
-        project = session.query(Project).filter_by(id=project_id).first()
+        project = session.query(Project).filter_by(id=project_id, is_deleted=False).first()
         if not project:
             return False, f"Project with ID {project_id} not found!"
         
-        session.delete(project)
+        # Soft delete instead of hard delete
+        project.is_deleted = True
+        project.updated_at = datetime.now()
         session.commit()
         return True, f"Project '{project.name}' deleted successfully!"
         
@@ -162,7 +167,7 @@ def delete_project(project_id):
 def add_time_entry(project_id, hours_worked, description, task_type=None):
     session = get_session()
     try:
-        project = session.query(Project).filter_by(id=project_id).first()
+        project = session.query(Project).filter_by(id=project_id, is_deleted=False).first()
         if not project:
             return False, f"Project with ID {project_id} not found!"
         
@@ -287,8 +292,8 @@ def get_category_by_id(category_id):
 def get_business_summary():
     session = get_session()
     try:
-        clients = session.query(Client).all()
-        projects = session.query(Project).all()
+        clients = session.query(Client).filter_by(is_deleted=False).all()
+        projects = session.query(Project).filter_by(is_deleted=False).all()
         time_entries = session.query(TimeEntry).all()
         
         total_clients = len(clients)
@@ -324,7 +329,7 @@ def get_business_summary():
 def get_client_earnings(client_id):
     session = get_session()
     try:
-        client = session.query(Client).filter_by(id=client_id).first()
+        client = session.query(Client).filter_by(id=client_id, is_deleted=False).first()
         if not client:
             return 0
         return client.get_total_earnings()

@@ -36,15 +36,15 @@ The project follows a modular structure with clear separation of concerns:
 
 text
 freelancer-tracker/
-├── cli.py              # Command-line interface using Click
-├── crud.py             # Database operations (Create, Read, Update, Delete)
-├── models.py           # SQLAlchemy database models and schema
-├── seed.py             # Database seeding with sample data
-├── debug.py            # Debug utilities and database inspection
-├── main.py             # Interactive menu interface
-├── requirements.txt    # Project dependencies
-├── Pipfile             # Pipenv configuration
-├── README.md           # Project documentation
+├── cli.py # Command-line interface using Click
+├── crud.py # Database operations (Create, Read, Update, Delete)
+├── models.py # SQLAlchemy database models and schema
+├── seed.py # Database seeding with sample data
+├── debug.py # Debug utilities and database inspection
+├── main.py # Interactive menu interface
+├── requirements.txt # Project dependencies
+├── Pipfile # Pipenv configuration
+├── README.md # Project documentation
 └── freelancer_tracker.db # SQLite database (generated)
 Database Schema
 The application uses SQLite with the following tables:
@@ -105,24 +105,30 @@ Command Line Interface
 The application provides a comprehensive CLI with the following commands:
 
 bash
+
 # Client management
+
 python cli.py client add --name "Client Name" --email "client@example.com"
 python cli.py client list
 python cli.py client view <ID>
 
 # Project management
+
 python cli.py project add --name "Project Name" --client-id 1 --rate 50.0
 python cli.py project list
 
 # Time tracking
+
 python cli.py time log --project-id 1 --hours 3.5 --description "Work description"
 python cli.py time recent --days 7
 
 # Reports and analytics
+
 python cli.py summary
 python cli.py report --days 30
 
 # Database utilities
+
 python cli.py seed
 python cli.py debug
 Interactive Menu Interface

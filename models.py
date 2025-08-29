@@ -1,19 +1,16 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, ForeignKey, Text, Boolean, Enum
-from sqlalchemy.orm import declarative_base, declared_attr, relationship, sessionmaker
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from datetime import datetime
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-class Base:
-    @declared_attr
-    def __tablename__(cls):
-        return cls.__name__.lower() + 's'
-
-Base = declarative_base(cls=Base)
+Base = declarative_base()
 
 class Client(Base):
+    __tablename__ = 'clients'
+    
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
     email = Column(String(150), unique=True, nullable=False)
@@ -32,6 +29,8 @@ class Client(Base):
         return sum(project.get_total_earnings() for project in self.projects)
 
 class Project(Base):
+    __tablename__ = 'projects'
+    
     id = Column(Integer, primary_key=True)
     name = Column(String(150), nullable=False)
     description = Column(Text)
@@ -57,6 +56,8 @@ class Project(Base):
         return self.get_total_hours() * self.hourly_rate
 
 class TimeEntry(Base):
+    __tablename__ = 'time_entries'
+    
     id = Column(Integer, primary_key=True)
     date = Column(DateTime, default=datetime.now)
     hours_worked = Column(Float, nullable=False)
@@ -74,6 +75,8 @@ class TimeEntry(Base):
         return self.hours_worked * self.project.hourly_rate
 
 class Category(Base):
+    __tablename__ = 'categories'
+    
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True, nullable=False)
     description = Column(Text)

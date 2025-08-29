@@ -1,3 +1,0 @@
-[console_scripts]
-freelancer-tracker = cli:cli
-ftracker = cli:cli

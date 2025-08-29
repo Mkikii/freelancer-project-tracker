@@ -13,29 +13,13 @@ from tabulate import tabulate
 from seed import seed_database
 from debug import debug_database
 
-Session = sessionmaker(bind=engine)
-
 @click.group()
 def cli():
     """💼 Freelancer Project & Time Tracker by Maureen W Karimi
     
     Manage your freelance business with ease! Track clients, projects, and time worked.
     """
-
     init_db()
-
-@cli.command()
-def seed():
-    """🌱 Seed the database with sample data"""
-    if click.confirm("This will delete all existing data. Are you sure?"):
-        seed_database()
-    else:
-        click.echo("Seeding cancelled.")
-
-@cli.command()
-def debug():
-    """🔧 Show database debug information"""
-    debug_database()
 
 @cli.group()
 def client():
@@ -49,11 +33,7 @@ def client():
 @click.option('--phone', prompt='Phone (optional)', default='', help='Phone number')
 def add(name, email, company, phone):
     """Add a new client to your business"""
-    success, message = add_client(
-        name, email, 
-        company if company else None, 
-        phone if phone else None
-    )
+    success, message = add_client(name, email, company if company else None, phone if phone else None)
     
     if success:
         click.echo(f"✅ {message}")
@@ -75,12 +55,8 @@ def list():
         total_earnings = client.get_total_earnings()
         
         table_data.append([
-            client.id,
-            client.name,
-            client.company or "N/A",
-            client.email,
-            projects_count,
-            f"${total_earnings:.2f}"
+            client.id, client.name, client.company or "N/A",
+            client.email, projects_count, f"${total_earnings:.2f}"
         ])
     
     headers = ["ID", "Name", "Company", "Email", "Projects", "Total Earned"]
@@ -114,12 +90,8 @@ def view(client_id):
             total_earnings = project.get_total_earnings()
             
             table_data.append([
-                project.id,
-                project.name,
-                f"${project.hourly_rate:.2f}",
-                f"{total_hours:.1f}h",
-                f"${total_earnings:.2f}",
-                project.status.upper()
+                project.id, project.name, f"${project.hourly_rate:.2f}",
+                f"{total_hours:.1f}h", f"${total_earnings:.2f}", project.status.upper()
             ])
         
         headers = ["ID", "Project", "Rate/hr", "Hours", "Earned", "Status"]
@@ -141,11 +113,7 @@ def project():
 @click.option('--category-id', prompt='Category ID (optional)', default=None, type=int, help='Category ID')
 def add(name, client_id, rate, description, category_id):
     """Create a new project"""
-    success, message = add_project(
-        name, client_id, rate,
-        description if description else None,
-        category_id if category_id else None
-    )
+    success, message = add_project(name, client_id, rate, description if description else None, category_id)
     
     if success:
         click.echo(f"✅ {message}")
@@ -167,13 +135,9 @@ def list():
         total_earnings = project.get_total_earnings()
         
         table_data.append([
-            project.id,
-            project.name,
-            project.client.name,
-            f"${project.hourly_rate:.2f}",
-            f"{total_hours:.1f}h",
-            f"${total_earnings:.2f}",
-            project.status.upper()
+            project.id, project.name, project.client.name,
+            f"${project.hourly_rate:.2f}", f"{total_hours:.1f}h",
+            f"${total_earnings:.2f}", project.status.upper()
         ])
     
     headers = ["ID", "Project", "Client", "Rate/hr", "Hours", "Earned", "Status"]
@@ -210,15 +174,14 @@ def view(project_id):
         table_data = []
         for entry in project.time_entries[:10]:
             table_data.append([
-                entry.date.strftime('%Y-%m-%d'),
-                f"{entry.hours_worked:.2f}h",
-                entry.description[:40] + "..." if len(entry.description) > 40 else entry.description,
+                entry.date.strftime('%Y-%m-%d'), f"{entry.hours_worked:.2f}h",
+                entry.description[:50] + "..." if len(entry.description) > 50 else entry.description,
                 f"${entry.get_earnings():.2f}"
             ])
         
         headers = ["Date", "Hours", "Description", "Earned"]
         click.echo(tabulate(table_data, headers=headers, tablefmt="simple"))
-   
+    
     total_hours = project.get_total_hours()
     total_earnings = project.get_total_earnings()
     click.echo(f"\n📊 TOTALS: {total_hours:.2f} hours | 💰 ${total_earnings:.2f}")
@@ -248,10 +211,7 @@ def time():
 @click.option('--task-type', prompt='Task type (optional)', default='', help='Type of task (coding, design, meeting, etc.)')
 def log(project_id, hours, description, task_type):
     """Log time worked on a project"""
-    success, message = add_time_entry(
-        project_id, hours, description,
-        task_type if task_type else None
-    )
+    success, message = add_time_entry(project_id, hours, description, task_type if task_type else None)
     
     if success:
         click.echo(f"✅ {message}")
@@ -279,8 +239,7 @@ def recent(days):
         total_earnings += earnings
         
         table_data.append([
-            entry.date.strftime('%Y-%m-%d'),
-            entry.project.name,
+            entry.date.strftime('%Y-%m-%d'), entry.project.name,
             f"{entry.hours_worked:.1f}h",
             entry.description[:50] + "..." if len(entry.description) > 50 else entry.description,
             f"${earnings:.2f}"
@@ -302,11 +261,7 @@ def category():
 @click.option('--color', prompt='Color code (optional)', default='', help='Hex color code (e.g., #FF5733)')
 def add(name, description, color):
     """Add a new work category"""
-    success, message = add_category(
-        name,
-        description if description else None,
-        color if color else None
-    )
+    success, message = add_category(name, description if description else None, color if color else None)
     
     if success:
         click.echo(f"✅ {message}")
@@ -327,11 +282,8 @@ def list():
         projects_count = len(category.projects)
         
         table_data.append([
-            category.id,
-            category.name,
-            category.description or "N/A",
-            category.color_code or "N/A",
-            projects_count
+            category.id, category.name, category.description or "N/A",
+            category.color_code or "N/A", projects_count
         ])
     
     headers = ["ID", "Name", "Description", "Color", "Projects"]
@@ -374,7 +326,7 @@ def report(days):
     click.echo("="*60)
     
     cutoff_date = datetime.now() - timedelta(days=days)
-    session = Session()
+    session = sessionmaker(bind=engine)()
     
     try:
         entries = session.query(TimeEntry).filter(
@@ -384,10 +336,10 @@ def report(days):
         if not entries:
             click.echo("No time entries found for this period.")
             return
-       
+        
         total_hours = sum(entry.hours_worked for entry in entries)
         total_earnings = sum(entry.get_earnings() for entry in entries)
-       
+        
         projects = {}
         for entry in entries:
             project_id = entry.project_id
@@ -412,23 +364,18 @@ def report(days):
             table_data = []
             for project_id, data in projects.items():
                 table_data.append([
-                    data['name'],
-                    data['client'],
-                    f"{data['hours']:.2f}h",
-                    f"${data['earnings']:.2f}"
+                    data['name'], data['client'],
+                    f"{data['hours']:.2f}h", f"${data['earnings']:.2f}"
                 ])
             
             headers = ["Project", "Client", "Hours", "Earnings"]
             click.echo(tabulate(table_data, headers=headers, tablefmt="grid"))
-      
+        
         daily_data = {}
         for entry in entries:
             date_str = entry.date.strftime('%Y-%m-%d')
             if date_str not in daily_data:
-                daily_data[date_str] = {
-                    'hours': 0,
-                    'earnings': 0
-                }
+                daily_data[date_str] = {'hours': 0, 'earnings': 0}
             
             daily_data[date_str]['hours'] += entry.hours_worked
             daily_data[date_str]['earnings'] += entry.get_earnings()
@@ -436,11 +383,7 @@ def report(days):
         click.echo("\n📅 DAILY BREAKDOWN:")
         table_data = []
         for date_str, data in sorted(daily_data.items(), reverse=True):
-            table_data.append([
-                date_str,
-                f"{data['hours']:.2f}h",
-                f"${data['earnings']:.2f}"
-            ])
+            table_data.append([date_str, f"{data['hours']:.2f}h", f"${data['earnings']:.2f}"])
         
         headers = ["Date", "Hours", "Earnings"]
         click.echo(tabulate(table_data, headers=headers, tablefmt="simple"))
@@ -449,6 +392,19 @@ def report(days):
         click.echo(f"❌ Error generating report: {str(e)}")
     finally:
         session.close()
+
+@cli.command()
+def debug():
+    """🔧 Show database debug information"""
+    debug_database()
+
+@cli.command()
+def seed():
+    """🌱 Seed the database with sample data"""
+    if click.confirm("This will delete all existing data. Are you sure?"):
+        seed_database()
+    else:
+        click.echo("Seeding cancelled.")
 
 if __name__ == '__main__':
     cli()

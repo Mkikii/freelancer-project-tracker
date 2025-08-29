@@ -33,8 +33,8 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "freelancer-tracker=cli:cli",
-            "ftracker=cli:cli",  
+            "freelancer-tracker=cli:cli",  
         ],
     },
+    include_package_data=True,
 )

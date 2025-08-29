@@ -8,11 +8,6 @@ env/
 venv/
 .venv/
 
-# Database (optional - you might want to commit the .db file to show data)
-# *.db
-# *.sqlite
-# *.sqlite3
-
 # IDE
 .vscode/
 .idea/

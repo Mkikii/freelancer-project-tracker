@@ -3,20 +3,13 @@ from datetime import datetime, timedelta
 from sqlalchemy.exc import IntegrityError
 
 def add_client(name, email, company=None, phone=None):
-    """Add a new client to the database"""
     session = get_session()
     try:
-    
         existing_client = session.query(Client).filter_by(email=email).first()
         if existing_client:
             return False, f"Client with email {email} already exists!"
         
-        new_client = Client(
-            name=name,
-            email=email,
-            company=company,
-            phone=phone
-        )
+        new_client = Client(name=name, email=email, company=company, phone=phone)
         session.add(new_client)
         session.commit()
         return True, f"Client '{name}' added successfully!"
@@ -31,7 +24,6 @@ def add_client(name, email, company=None, phone=None):
         session.close()
 
 def get_all_clients():
-    """Get all clients from database"""
     session = get_session()
     try:
         clients = session.query(Client).all()
@@ -43,7 +35,6 @@ def get_all_clients():
         session.close()
 
 def get_client_by_id(client_id):
-    """Get a specific client by ID"""
     session = get_session()
     try:
         client = session.query(Client).filter_by(id=client_id).first()
@@ -55,7 +46,6 @@ def get_client_by_id(client_id):
         session.close()
 
 def update_client(client_id, **kwargs):
-    """Update client information"""
     session = get_session()
     try:
         client = session.query(Client).filter_by(id=client_id).first()
@@ -76,7 +66,6 @@ def update_client(client_id, **kwargs):
         session.close()
 
 def delete_client(client_id):
-    """Delete a client"""
     session = get_session()
     try:
         client = session.query(Client).filter_by(id=client_id).first()
@@ -94,20 +83,15 @@ def delete_client(client_id):
         session.close()
 
 def add_project(name, client_id, hourly_rate, description=None, category_id=None):
-    """Add a new project to the database"""
     session = get_session()
     try:
-    
         client = session.query(Client).filter_by(id=client_id).first()
         if not client:
             return False, f"Client with ID {client_id} not found!"
         
         new_project = Project(
-            name=name,
-            client_id=client_id,
-            hourly_rate=hourly_rate,
-            description=description,
-            category_id=category_id
+            name=name, client_id=client_id, hourly_rate=hourly_rate,
+            description=description, category_id=category_id
         )
         session.add(new_project)
         session.commit()
@@ -120,7 +104,6 @@ def add_project(name, client_id, hourly_rate, description=None, category_id=None
         session.close()
 
 def get_all_projects():
-    """Get all projects from database"""
     session = get_session()
     try:
         projects = session.query(Project).all()
@@ -132,7 +115,6 @@ def get_all_projects():
         session.close()
 
 def get_project_by_id(project_id):
-    """Get a specific project by ID"""
     session = get_session()
     try:
         project = session.query(Project).filter_by(id=project_id).first()
@@ -144,7 +126,6 @@ def get_project_by_id(project_id):
         session.close()
 
 def update_project_status(project_id, status):
-    """Update project status"""
     session = get_session()
     try:
         project = session.query(Project).filter_by(id=project_id).first()
@@ -162,7 +143,6 @@ def update_project_status(project_id, status):
         session.close()
 
 def delete_project(project_id):
-    """Delete a project"""
     session = get_session()
     try:
         project = session.query(Project).filter_by(id=project_id).first()
@@ -180,19 +160,15 @@ def delete_project(project_id):
         session.close()
 
 def add_time_entry(project_id, hours_worked, description, task_type=None):
-    """Add a new time entry"""
     session = get_session()
     try:
-        
         project = session.query(Project).filter_by(id=project_id).first()
         if not project:
             return False, f"Project with ID {project_id} not found!"
         
         new_entry = TimeEntry(
-            project_id=project_id,
-            hours_worked=hours_worked,
-            description=description,
-            task_type=task_type
+            project_id=project_id, hours_worked=hours_worked,
+            description=description, task_type=task_type
         )
         session.add(new_entry)
         session.commit()
@@ -207,7 +183,6 @@ def add_time_entry(project_id, hours_worked, description, task_type=None):
         session.close()
 
 def get_recent_time_entries(days=7):
-    """Get time entries from the last N days"""
     session = get_session()
     try:
         cutoff_date = datetime.now() - timedelta(days=days)
@@ -222,7 +197,6 @@ def get_recent_time_entries(days=7):
         session.close()
 
 def get_all_time_entries():
-    """Get all time entries"""
     session = get_session()
     try:
         entries = session.query(TimeEntry).all()
@@ -234,7 +208,6 @@ def get_all_time_entries():
         session.close()
 
 def update_time_entry(entry_id, **kwargs):
-    """Update a time entry"""
     session = get_session()
     try:
         entry = session.query(TimeEntry).filter_by(id=entry_id).first()
@@ -255,7 +228,6 @@ def update_time_entry(entry_id, **kwargs):
         session.close()
 
 def delete_time_entry(entry_id):
-    """Delete a time entry"""
     session = get_session()
     try:
         entry = session.query(TimeEntry).filter_by(id=entry_id).first()
@@ -273,19 +245,13 @@ def delete_time_entry(entry_id):
         session.close()
 
 def add_category(name, description=None, color_code=None):
-    """Add a new category"""
     session = get_session()
     try:
-        
         existing_category = session.query(Category).filter_by(name=name).first()
         if existing_category:
             return False, f"Category '{name}' already exists!"
         
-        new_category = Category(
-            name=name,
-            description=description,
-            color_code=color_code
-        )
+        new_category = Category(name=name, description=description, color_code=color_code)
         session.add(new_category)
         session.commit()
         return True, f"Category '{name}' added successfully!"
@@ -297,7 +263,6 @@ def add_category(name, description=None, color_code=None):
         session.close()
 
 def get_all_categories():
-    """Get all categories"""
     session = get_session()
     try:
         categories = session.query(Category).filter_by(is_active=True).all()
@@ -309,7 +274,6 @@ def get_all_categories():
         session.close()
 
 def get_category_by_id(category_id):
-    """Get a specific category by ID"""
     session = get_session()
     try:
         category = session.query(Category).filter_by(id=category_id).first()
@@ -321,7 +285,6 @@ def get_category_by_id(category_id):
         session.close()
 
 def get_business_summary():
-    """Get overall business summary"""
     session = get_session()
     try:
         clients = session.query(Client).all()
@@ -359,13 +322,11 @@ def get_business_summary():
         session.close()
 
 def get_client_earnings(client_id):
-    """Get total earnings from a specific client"""
     session = get_session()
     try:
         client = session.query(Client).filter_by(id=client_id).first()
         if not client:
             return 0
-        
         return client.get_total_earnings()
         
     except Exception as e:

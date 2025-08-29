@@ -1,4 +1,5 @@
 import click
+
 from crud import (
     add_client, get_all_clients, get_client_by_id, update_client, delete_client,
     add_project, get_all_projects, get_project_by_id, update_project_status, delete_project,

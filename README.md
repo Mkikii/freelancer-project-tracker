@@ -1,4 +1,4 @@
-# Freelancer Project & Time Tracker
+Freelancer Project & Time Tracker
 
 A comprehensive command-line application for freelancers to track clients, projects, and time worked. Built with Python, SQLAlchemy ORM, and Click for efficient management of freelance business operations.
 
@@ -41,9 +41,7 @@ freelancer-tracker/
 ├── alembic.ini # Alembic configuration
 ├── migrations/ # Database migration scripts
 └── freelancer_tracker.db # SQLite database (generated)
-
-## Database Schema
-
+Database Schema
 The application uses SQLite with the following tables:
 
 - **clients**: Stores client information (name, email, company, phone, notes, timestamps)
@@ -66,7 +64,7 @@ Ensure you have the following software installed on your system:
 
 Download the project files to your local machine and navigate to the project directory:
 
-```bash
+bash
 cd freelancer-tracker
 Step 2: Set Up Virtual Environment and Dependencies
 Install dependencies using Pipenv:
@@ -180,16 +178,3 @@ This project is open-source and distributed under the MIT License.
 
 Support
 For questions or issues related to this application, please refer to the documentation above or check the GitHub repository for updates and community support.
-
-text
-
-## Step 3: Test Alembic after fixing the duplicate
-
-```bash
-# Fix the duplicate in alembic.ini first
-# Then test Alembic
-alembic revision --autogenerate -m"Initial migration"
-alembic upgrade head
-
-# Verify it worked
-alembic current

@@ -176,5 +176,5 @@ Contributions are welcome. If you have suggestions for improvements, new feature
 License
 This project is open-source and distributed under the MIT License.
 
-Support
-For questions or issues related to this application, please refer to the documentation above or check the GitHub repository for updates and community support.
+Author
+Maureen K

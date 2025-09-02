@@ -1,71 +1,55 @@
-Freelancer Tracker CLI - A command-line application that helps freelancers manage their business by tracking clients, projects, time worked, and earnings.
+Freelancer Tracker CLI
+A command-line application that helps freelancers manage clients, projects, time tracking, and earnings reports.
 
-How It Works:
-Database Structure (models.py):
+How It Works
+Database Structure (models.py)
 
-Client table: Stores client info (name, email, hourly rate)
+Client: Stores client info (name, email, phone, company, hourly rate)
 
-Project table: Stores projects linked to clients (with custom rates & deadlines)
+Project: Linked to clients, with custom rates and deadlines
 
-TimeEntry table: Tracks hours worked on each project
+TimeEntry: Tracks hours worked per project
 
-CLI Commands (cli.py):
+CLI Commands (cli.py)
 
 add-client: Register new clients
+
+list-clients: View all clients
 
 add-project: Create projects for clients
 
 log-time: Record work hours
 
-list-clients/list-projects: View data
+earnings-report: Generate earnings summary
 
-time-report/earnings-report: Generate business insights
+Helpers (helpers.py)
 
-Helpers (helpers.py):
+Input validation
 
-Input validation (email format)
-
-Data structure handling (lists/dictionaries)
+Data structure handling
 
 Database session management
 
-Key Features:
-✅ Client management with hourly rates
+Features
+Client management with hourly rates
 
-✅ Project tracking with custom pricing
+Project tracking with custom pricing
 
-✅ Time tracking and earnings calculations
+Time tracking and earnings calculations
 
-✅ Business reports and analytics
+Business reports and analytics
 
-✅ SQLite database storage
+SQLite database storage
 
-Installation & Update:
+Prerequisites
+Python 3.10+
+
+Pipenv installed
+
+Click (installed via Pipfile or manually with pipenv install click==8.1.3)
+
+Installation
 bash
-
-# Install click (already installed via Pipfile)
-
-pipenv install click==8.1.3
-
-# Update README.md
-
-cat > README.md << 'EOF'
-
-# Freelancer Tracker
-
-A command-line application for freelancers to manage clients, projects, time tracking, and earnings reports.
-
-## Features
-
-- Client management with hourly rates
-- Project tracking with custom pricing
-- Time entry logging
-- Earnings reports by client and time period
-- Business analytics and insights
-
-## Installation
-
-```bash
 git clone <your-repo>
 cd freelancer-tracker
 pipenv shell
@@ -76,9 +60,15 @@ python lib/cli.py add-client --name "Client" --email "client@email.com" --rate 7
 python lib/cli.py add-project --name "Project" --client-id 1 --rate 85.0
 python lib/cli.py log-time --description "Work" --hours 5.0 --client-id 1 --project-id 1
 python lib/cli.py earnings-report
+python lib/cli.py list-clients
+Documentation
+More detailed documentation coming soon.
+
+Contributing
+Pull requests are welcome. For major changes, open an issue first to discuss the proposed updates.
+
 Author
-Maureen K - Freelancer Business Management System
+Maureen K
 
 License
 MIT License
-```

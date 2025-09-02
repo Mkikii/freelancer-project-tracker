@@ -1,5 +1,5 @@
 Freelancer Tracker CLI
-A command-line application that helps freelancers manage clients, projects, time tracking, and earnings reports.
+A command-line application for freelancers to manage clients, projects, time tracking, and earnings reports.
 
 How It Works
 Database Structure (models.py)
@@ -8,38 +8,34 @@ Client: Stores client info (name, email, phone, company, hourly rate)
 
 Project: Linked to clients, with custom rates and deadlines
 
-TimeEntry: Tracks hours worked per project
+TimeEntry: Logs hours worked per project and calculates earnings
 
 CLI Commands (cli.py)
 
-add-client: Register new clients
+add-client: Add new client with details
 
 list-clients: View all clients
 
-add-project: Create projects for clients
+add-project: Add project for client
 
-log-time: Record work hours
+list-projects: View all projects
 
-earnings-report: Generate earnings summary
+log-time: Log work hours on project
 
-Helpers (helpers.py)
+time-report: Generate time worked report
 
-Input validation
-
-Data structure handling
-
-Database session management
+earnings-report: Generate earnings report
 
 Features
-Client management with hourly rates
+Client management (name, email, phone, company, hourly rate)
 
-Project tracking with custom pricing
+Project tracking with custom rates and deadlines
 
-Time tracking and earnings calculations
+Time entry logging with earnings calculation
 
-Business reports and analytics
+Time reports by client and project
 
-SQLite database storage
+Earnings reports by client and time period
 
 Prerequisites
 Python 3.10+
@@ -56,19 +52,21 @@ pipenv shell
 pipenv install
 Usage
 bash
-python lib/cli.py add-client --name "Client" --email "client@email.com" --rate 75.0
-python lib/cli.py add-project --name "Project" --client-id 1 --rate 85.0
-python lib/cli.py log-time --description "Work" --hours 5.0 --client-id 1 --project-id 1
-python lib/cli.py earnings-report
+python lib/cli.py add-client --name "Client" --email "client@email.com" --phone "0712345678" --company "Acme Inc." --rate 75.0
 python lib/cli.py list-clients
+python lib/cli.py add-project --name "Project" --client-id 1 --rate 85.0 --deadline "2025-09-30"
+python lib/cli.py list-projects
+python lib/cli.py log-time --description "Work session" --hours 5.0 --client-id 1 --project-id 1
+python lib/cli.py time-report
+python lib/cli.py earnings-report
 Documentation
-More detailed documentation coming soon.
+More detailed documentation will be added soon.
 
 Contributing
 Pull requests are welcome. For major changes, open an issue first to discuss the proposed updates.
 
 Author
-Maureen K
+My name is My Name Maureen K
 
 License
 MIT License

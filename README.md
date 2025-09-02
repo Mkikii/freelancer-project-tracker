@@ -66,7 +66,7 @@ Contributing
 Pull requests are welcome. For major changes, open an issue first to discuss the proposed updates.
 
 Author
-My name is My Name Maureen K
+My name is Maureen K
 
 License
 MIT License

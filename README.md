@@ -45,10 +45,10 @@ freelancer-tracker/
 Database Schema
 The application uses SQLite with the following tables:
 
-- clients**: Stores client information (name, email, company, phone, notes, timestamps)
-- projects**: Tracks project details (name, description, hourly rate, status, deadline, timestamps)
-- time_entries**: Records work sessions (hours, description, task type, date, timestamps)
-- categories**: Organizes projects by type (Web Development, Mobile Development, etc.)
+- clients: Stores client information (name, email, company, phone, notes, timestamps)
+- projects: Tracks project details (name, description, hourly rate, status, deadline, timestamps)
+- time_entries: Records work sessions (hours, description, task type, date, timestamps)
+- categories: Organizes projects by type (Web Development, Mobile Development, etc.)
 
  Local Development Setup
 

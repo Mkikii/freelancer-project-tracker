@@ -1,31 +1,31 @@
-Freelancer Project & Time Tracker
+ Freelancer Project & Time Tracker
 
 A comprehensive command-line application for freelancers to track clients, projects, and time worked. Built with Python, SQLAlchemy ORM, and Click for efficient management of freelance business operations.
 
-## Key Features
+Key Features
 
-- **Client Management**: Add, view, update, and delete client information with complete contact details and notes
-- **Project Tracking**: Manage projects with hourly rates, status tracking, deadlines, and categorization
-- **Time Logging**: Track work sessions with detailed descriptions, task types, and automatic earnings calculation
-- **Category System**: Organize projects by work types such as Web Development, Mobile Development, and UI/UX Design
-- **Business Reporting**: Generate comprehensive summaries and detailed reports of hours worked and earnings
-- **Data Analytics**: View business insights including total hours, earnings, and performance metrics
-- **Sample Data Generation**: Populate the database with realistic sample data for testing and demonstration
-- **Database Migrations**: Use Alembic for managed database schema changes and version control
+- Client Management**: Add, view, update, and delete client information with complete contact details and notes
+- Project Tracking**: Manage projects with hourly rates, status tracking, deadlines, and categorization
+- Time Logging**: Track work sessions with detailed descriptions, task types, and automatic earnings calculation
+- Category System**: Organize projects by work types such as Web Development, Mobile Development, and UI/UX Design
+- Business Reporting**: Generate comprehensive summaries and detailed reports of hours worked and earnings
+- Data Analytics**: View business insights including total hours, earnings, and performance metrics
+- Sample Data Generation**: Populate the database with realistic sample data for testing and demonstration
+- Database Migrations**: Use Alembic for managed database schema changes and version control
 
-## Technical Stack
+ Technical Stack
 
 This application is built with a robust Python backend stack, focusing on data persistence and command-line usability.
 
-- **Python 3.8+**: Core programming language
-- **SQLAlchemy ORM**: Database object-relational mapping for efficient data management
-- **Click**: Command-line interface framework for intuitive user interactions
-- **Tabulate**: Data formatting for clean, readable output tables
-- **Faker**: Sample data generation for testing and demonstration
-- **Python-dotenv**: Environment variable management for configuration
-- **Alembic**: Database migration tool for schema version control
+- Python 3.8+**: Core programming language
+- SQLAlchemy ORM**: Database object-relational mapping for efficient data management
+- Click**: Command-line interface framework for intuitive user interactions
+- Tabulate**: Data formatting for clean, readable output tables
+- Faker**: Sample data generation for testing and demonstration
+- Python-dotenv**: Environment variable management for configuration
+- Alembic**: Database migration tool for schema version control
 
-## Project Architecture
+Project Architecture
 
 The project follows a modular structure with clear separation of concerns:
 freelancer-tracker/
@@ -41,30 +41,31 @@ freelancer-tracker/
 ├── alembic.ini # Alembic configuration
 ├── migrations/ # Database migration scripts
 └── freelancer_tracker.db # SQLite database (generated)
+
 Database Schema
 The application uses SQLite with the following tables:
 
-- **clients**: Stores client information (name, email, company, phone, notes, timestamps)
-- **projects**: Tracks project details (name, description, hourly rate, status, deadline, timestamps)
-- **time_entries**: Records work sessions (hours, description, task type, date, timestamps)
-- **categories**: Organizes projects by type (Web Development, Mobile Development, etc.)
+- clients: Stores client information (name, email, company, phone, notes, timestamps)
+- projects: Tracks project details (name, description, hourly rate, status, deadline, timestamps)
+- time_entries: Records work sessions (hours, description, task type, date, timestamps)
+- categories: Organizes projects by type (Web Development, Mobile Development, etc.)
 
-## Local Development Setup
+ Local Development Setup
 
 To run the Freelancer Tracker on your local machine, follow these instructions.
 
-### Prerequisites
+Prerequisites
 
 Ensure you have the following software installed on your system:
 
 - Python 3.8 or higher
 - Pipenv for virtual environment management
 
-### Step 1: Clone or Download the Project
+Step 1: Clone or Download the Project
 
 Download the project files to your local machine and navigate to the project directory:
 
-bash
+```bash
 cd freelancer-tracker
 Step 2: Set Up Virtual Environment and Dependencies
 Install dependencies using Pipenv:
@@ -176,5 +177,5 @@ Contributions are welcome. If you have suggestions for improvements, new feature
 License
 This project is open-source and distributed under the MIT License.
 
-Support
-For questions or issues related to this application, please refer to the documentation above or check the GitHub repository for updates and community support.
+Author
+Maureen W Karimi

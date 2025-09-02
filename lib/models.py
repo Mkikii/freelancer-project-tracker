@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from datetime import datetime
-import os
 
 Base = declarative_base()
 
@@ -10,6 +9,8 @@ class Client(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     email = Column(String, unique=True)
+    phone = Column(String)
+    company = Column(String)
     hourly_rate = Column(Float, default=50.0)
     projects = relationship("Project", back_populates="client")
     time_entries = relationship("TimeEntry", back_populates="client")
@@ -35,7 +36,6 @@ class TimeEntry(Base):
     client = relationship("Client", back_populates="time_entries")
     project = relationship("Project", back_populates="time_entries")
 
-db_path = os.path.join(os.path.dirname(__file__), '..', 'freelancer.db')
-engine = create_engine(f'sqlite:///{os.path.abspath(db_path)}')
+engine = create_engine('sqlite:///freelancer.db')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)

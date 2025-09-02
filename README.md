@@ -1,4 +1,4 @@
-Freelancer Tracker CLI
+Freelancer-ProjectTracker
 A command-line application for freelancers to manage clients, projects, time tracking, and earnings reports.
 
 How It Works

@@ -16,6 +16,8 @@ def get_client_summary():
             'id': client.id,
             'name': client.name,
             'email': client.email,
+            'phone': client.phone,
+            'company': client.company,
             'hourly_rate': client.hourly_rate,
             'project_count': len(client.projects)
         }

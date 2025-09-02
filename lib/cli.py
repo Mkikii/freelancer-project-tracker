@@ -10,15 +10,17 @@ def cli():
 @cli.command()
 @click.option('--name', prompt='Client name')
 @click.option('--email', prompt='Client email')
+@click.option('--phone', prompt='Client phone', default='')
+@click.option('--company', prompt='Client company', default='')
 @click.option('--rate', prompt='Hourly rate', type=float, default=50.0)
-def add_client(name, email, rate):
+def add_client(name, email, phone, company, rate):
     if not validate_email(email):
         click.echo("Error: Invalid email format")
         return
         
     session = Session()
     try:
-        client = Client(name=name, email=email, hourly_rate=rate)
+        client = Client(name=name, email=email, phone=phone, company=company, hourly_rate=rate)
         session.add(client)
         session.commit()
         click.echo(f"Added client: {name}")
@@ -33,7 +35,7 @@ def list_clients():
     session = Session()
     clients = session.query(Client).all()
     for client in clients:
-        click.echo(f"{client.id}: {client.name} - {client.email} (${client.hourly_rate}/hr)")
+        click.echo(f"{client.id}: {client.name} - {client.email} - {client.company} (${client.hourly_rate}/hr)")
     session.close()
 
 @cli.command()

@@ -1,4 +1,3 @@
-# .gitignore
 __pycache__/
 *.py[cod]
 *$py.class
@@ -12,17 +11,14 @@ freelancer_env/
 *.sqlite
 *.sqlite3
 
-# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS
 .DS_Store
 Thumbs.db
 
-# Distribution
 dist/
 build/
 *.egg-info/

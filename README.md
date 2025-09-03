@@ -33,14 +33,17 @@ A command-line application for freelancers to manage clients, projects, time tra
 ## Installation
 
 1. Clone the repository:
-   ````bash
+
+   ```bash
    git clone https://github.com/Mkikii/freelancer-project-tracker.git
    cd freelancer-project-tracker
-   Activate the virtual environment and install dependencies:
+   ```
+
+2. Activate the virtual environment and install dependencies:
    ```bash
    pipenv shell
    pipenv install
-   ````
+   ```
 
 > **Note**: The database file (`.db`) is automatically created upon first use and is ignored by Git. Make sure `*.db` is listed in your `.gitignore`.
 
@@ -48,7 +51,7 @@ A command-line application for freelancers to manage clients, projects, time tra
 
 ## Getting Started
 
-Run the application using `cli.py`.
+Run the application using `cli.py`. No need to run `main.py`.
 
 ---
 

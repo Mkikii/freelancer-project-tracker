@@ -41,7 +41,7 @@ Business logic and database operations are modularized in `lib/crud.py`, keeping
 
 ## Getting Started
 
-Run the application using `cli.py`. No need to run `main.py`.
+Run the application using `cli.py`. 
 
 ## Project Structure
 

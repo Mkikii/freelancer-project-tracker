@@ -12,6 +12,8 @@ A command-line application for freelancers to manage clients, projects, time tra
 - **Project**: Linked to clients, with custom rates and deadlines.
 - **TimeEntry**: Logs hours worked per project and calculates earnings.
 
+The database is created automatically using SQLAlchemy ORM when the application runs. No manual migrations are required.
+
 ---
 
 ## Features
@@ -55,13 +57,33 @@ Run the application using `cli.py`. No need to run `main.py`.
 
 ---
 
+## Project Structure
+
+```
+freelancer-project-tracker/
+│
+├── lib/
+│   ├── cli.py          # CLI commands and user interaction
+│   ├── crud.py         # Business logic and database operations
+│   ├── models.py       # SQLAlchemy ORM models
+│   ├── helpers.py      # Utility functions (e.g., email validation)
+│   └── __init__.py
+│
+├── Pipfile
+├── Pipfile.lock
+├── .gitignore
+└── README.md
+```
+
+---
+
 ## CLI Commands (`cli.py`)
 
 - `add-client`: Add a new client.
 - `list-clients`: View all clients.
 - `add-project`: Add a project for a specific client.
 - `list-projects`: View all projects.
-- `log-time`: Log work hours on a project.
+- `log-time-entry`: Log work hours on a project.
 - `time-report`: Generate a time worked report.
 - `earnings-report`: Generate an earnings report.
 
@@ -70,27 +92,29 @@ Run the application using `cli.py`. No need to run `main.py`.
 ## Usage Examples
 
 ```bash
-# Add a new client
-python lib/cli.py add-client --name "Acme Inc." --email "client@acme.com" --phone "0712345678" --rate 75.0
-
-# List all clients
+python lib/cli.py add-client
 python lib/cli.py list-clients
-
-# Add a project for client with ID 1
-python lib/cli.py add-project --name "Website Redesign" --client-id 1 --rate 85.0 --deadline "2025-09-30"
-
-# Log 5 hours of work on a project
-python lib/cli.py log-time --description "Initial design concepts" --hours 5.0 --client-id 1 --project-id 1
-
-# Generate an earnings report
+python lib/cli.py add-project
+python lib/cli.py log-time-entry
+python lib/cli.py time-report
 python lib/cli.py earnings-report
 ```
 
 ---
 
+## Data Structures
+
+This project makes use of:
+
+- **Lists**: For displaying multiple clients, projects, and time entries.
+- **Dictionaries**: For aggregating earnings and hours per client.
+- **Tuples**: Used implicitly in query results and CLI formatting.
+
+---
+
 ## Documentation
 
-More detailed documentation, including a full list of command options, will be added soon.
+More detailed documentation, including a full list of command options and internal logic, will be added soon.
 
 ---
 
@@ -102,7 +126,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Author
 
-Maureen K
+my name is Maureen K
 
 ---
 

@@ -1,72 +1,105 @@
-Freelancer-Project-Tracker
+# Freelancer Project Tracker  
 A command-line application for freelancers to manage clients, projects, time tracking, and earnings reports.
 
-How It Works
-Database Structure (models.py)
+---
 
-Client: Stores client info (name, email, phone, company, hourly rate)
+## How It Works
 
-Project: Linked to clients, with custom rates and deadlines
+### Database Structure (`models.py`)
+- **Client**: Stores client information (name, email, phone, company, hourly rate).
+- **Project**: Linked to clients, with custom rates and deadlines.
+- **TimeEntry**: Logs hours worked per project and calculates earnings.
 
-TimeEntry: Logs hours worked per project and calculates earnings
+---
 
-CLI Commands (cli.py)
+## Features
+- Add, view, and manage clients.
+- Track projects with custom rates and deadlines.
+- Log work hours with automatic earnings calculation.
+- Generate time and earnings reports by client and project.
 
-add-client: Add new client with details
+---
 
-list-clients: View all clients
+## Prerequisites
+- Python 3.10+
+- Pipenv installed
 
-add-project: Add project for client
+---
 
-list-projects: View all projects
+## Installation
 
-log-time: Log work hours on project
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Mkikii/freelancer-project-tracker.git
+   cd freelancer-project-tracker
+   ```
 
-time-report: Generate time worked report
+2. Activate the virtual environment and install dependencies:
+   ```bash
+   pipenv shell
+   pipenv install
+   ```
 
-earnings-report: Generate earnings report
+> Note: The database file (`.db`) is automatically created upon first use and is ignored by Git. Make sure `*.db` is listed in your `.gitignore`.
 
-Features
-Client management (name, email, phone, company, hourly rate)
+---
 
-Project tracking with custom rates and deadlines
+## Getting Started
 
-Time entry logging with earnings calculation
+Run the application using `cli.py`. No need to run `main.py`.
 
-Time reports by client and project
+---
 
-Earnings reports by client and time period
+## CLI Commands (`cli.py`)
+- `add-client`: Add a new client.
+- `list-clients`: View all clients.
+- `add-project`: Add a project for a specific client.
+- `list-projects`: View all projects.
+- `log-time`: Log work hours on a project.
+- `time-report`: Generate a time worked report.
+- `earnings-report`: Generate an earnings report.
 
-Prerequisites
-Python 3.10+
+---
 
-Pipenv installed
+## Usage Examples
 
-Click (installed via Pipfile or manually with pipenv install click==8.1.3)
+```bash
+# Add a new client
+python lib/cli.py add-client --name "Acme Inc." --email "client@acme.com" --phone "0712345678" --rate 75.0
 
-Installation
-bash
-git clone <your-repo>
-cd freelancer-tracker
-pipenv shell
-pipenv install
-Usage
-bash
-python lib/cli.py add-client --name "Client" --email "client@email.com" --phone "0712345678" --company "Acme Inc." --rate 75.0
+# List all clients
 python lib/cli.py list-clients
-python lib/cli.py add-project --name "Project" --client-id 1 --rate 85.0 --deadline "2025-09-30"
-python lib/cli.py list-projects
-python lib/cli.py log-time --description "Work session" --hours 5.0 --client-id 1 --project-id 1
-python lib/cli.py time-report
+
+# Add a project for client with ID 1
+python lib/cli.py add-project --name "Website Redesign" --client-id 1 --rate 85.0 --deadline "2025-09-30"
+
+# Log 5 hours of work on a project
+python lib/cli.py log-time --description "Initial design concepts" --hours 5.0 --client-id 1 --project-id 1
+
+# Generate an earnings report
 python lib/cli.py earnings-report
-Documentation
-More detailed documentation will be added soon.
+```
 
-Contributing
-Pull requests are welcome. For major changes, open an issue first to discuss the proposed updates.
+---
 
-Author
-My name is Maureen K
+## Documentation
 
-License
+More detailed documentation, including a full list of command options, will be added soon.
+
+---
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss the proposed updates.
+
+---
+
+## Author
+
+Maureen K
+
+---
+
+## License
+
 MIT License

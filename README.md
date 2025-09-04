@@ -83,6 +83,7 @@ freelancer-tracker/
 ├── Pipfile.lock
 ├── README.md
 └── .gitignore
+
 Technical Features and Grading Criteria
 This section outlines how the project meets the technical requirements for grading.
 

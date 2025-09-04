@@ -29,6 +29,7 @@ SQLite
 DateTime
 
 Project Structure
+text
 freelancer-tracker/
 ├── lib/
 │   ├── __init__.py
@@ -47,15 +48,22 @@ Clone the repository
 Navigate to the project directory
 
 Install dependencies:
+
+bash
 pipenv install
 pipenv shell
 Initialize the database:
-python -c "from lib.models import Base, engine; Base.metadata.create_all(engine)"
+
+bash
 python -c "from lib.models import Base, engine; Base.metadata.create_all(engine)"
 Seed with sample data:
+
+bash
 python -c "from lib.seed import seed_database; seed_database()"
 Usage
 Run the application:
+
+bash
 python main.py
 Available Commands
 add-client: Add a new client

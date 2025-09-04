@@ -1,104 +1,114 @@
 Freelancer Project & Time Tracker
-A command-line application for freelancers to manage clients, projects, and track time with earnings reporting.
+A Python command-line application for freelancers to manage clients, projects, and time logs — with built-in earnings reporting.
 
-Description
-The Freelancer Project & Time Tracker is a Python CLI application designed to help freelancers manage their business operations. It provides functionality for tracking clients, managing projects, logging work hours, and generating earnings reports. Built with SQLAlchemy ORM and Click for the command-line interface.
+Overview
+The Freelancer Project & Time Tracker is a lightweight CLI tool designed to help freelancers manage their business operations. It enables users to:
 
-Features
-Client Management: Create and manage client profiles with contact information and hourly rates
+Create and manage client profiles
 
-Project Management: Create projects linked to specific clients with custom rates
+Link projects to clients with custom rates
 
-Time Tracking: Log hours worked on projects with descriptions and task types
+Log work hours with task descriptions
 
-Earnings Reporting: Generate comprehensive earnings reports by client and project
+Generate earnings reports by client or project
 
-Data Validation: Input validation with proper error handling
+Built with Click for the CLI and SQLAlchemy for ORM-based database interactions.
 
-SQLite Database: Lightweight database storage
+Prerequisites
+Before installing, ensure you have:
 
-Technologies Used
-Python 3.8+
+Python 3.8 or higher
 
-SQLAlchemy ORM
+Pipenv for virtual environment and dependency management
 
-Click
+Git (for cloning the repository)
 
-SQLite
-
-DateTime
-
-Project Structure
-text
-freelancer-tracker/
-├── lib/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── crud.py
-│   ├── helpers.py
-│   └── seed.py
-├── main.py
-├── Pipfile
-├── Pipfile.lock
-├── README.md
-└── .gitignore
 Installation
 Clone the repository
 
-Navigate to the project directory
-
-Install dependencies:
+bash
+git clone https://github.com/your-username/freelancer-tracker.git
+cd freelancer-tracker
+Set up a virtual environment and install dependencies
 
 bash
 pipenv install
 pipenv shell
-Initialize the database:
+Initialize the database
 
 bash
 python -c "from lib.models import Base, engine; Base.metadata.create_all(engine)"
-Seed with sample data:
+Seed with sample data (optional)
 
 bash
 python -c "from lib.seed import seed_database; seed_database()"
 Usage
-Run the application:
+Run the CLI application:
 
 bash
 python main.py
 Available Commands
-add-client: Add a new client
-
-list-clients: List all clients
-
-add-project: Add a new project
-
-list-projects: List all projects
-
-add-time: Log time worked
-
-list-time: List time entries
-
-earnings-report: Generate earnings report
-
-seed: Seed database with sample data
-
+Command	Description
+add-client	Add a new client
+list-clients	View all clients
+add-project	Add a new project
+list-projects	View all projects
+add-time	Log time worked
+list-time	View time entries
+earnings-report	Generate earnings report
+seed	Seed database with sample data
+Project Structure
+Code
+freelancer-tracker/
+├── lib/
+│   ├── __init__.py
+│   ├── models.py         # SQLAlchemy models
+│   ├── crud.py           # DB operations
+│   ├── helpers.py        # Utility functions
+│   └── seed.py           # Sample data seeding
+├── main.py               # CLI entry point
+├── Pipfile               # Dependency management
+├── Pipfile.lock
+├── README.md
+└── .gitignore
 Database Schema
-Clients Table
+Clients
 id, name, email, company, phone, hourly_rate, created_at
 
-Projects Table
+Projects
 id, name, description, client_id, hourly_rate, status, deadline, created_at
 
-TimeEntries Table
+TimeEntries
 id, project_id, date_worked, hours, description, task_type, created_at
 
-Support
-For questions or support, contact:
+Documentation
+For deeper understanding of the CLI structure and logic, refer to:
 
-Maureen W Karimi
+main.py — CLI command definitions
 
-maureen.karimi@student.moringaschool.com
+lib/models.py — SQLAlchemy database schema
+
+lib/crud.py — Database operations
+
+lib/helpers.py — Utility functions
+
+Inline comments and docstrings throughout the codebase
+
+Author
+Maureen W Karimi Email: maureen.karimi@student.moringaschool.com GitHub: github.com/maureenkarimi
+
+Contributing
+Contributions are welcome and appreciated. To contribute:
+
+Fork the repository
+
+Create a new branch (git checkout -b feature-name)
+
+Make your changes with clear, descriptive commit messages
+
+Push to your fork and open a pull request
+
+Please follow the existing code structure and include relevant documentation or comments. All contributions should maintain the project's clean setup and beginner-friendly standards.
 
 License
-MIT License
-
+This project is licensed under the MIT License.

@@ -99,6 +99,7 @@ Best Practices in CLI Design: The code separates scripted elements from function
 Documentation: A comprehensive README.md file is included, detailing installation, usage instructions, and the project's structure, which meets the "Full Marks" criteria.
 
 Addressing Instructor Concerns
+
 Alembic Migrations Implemented
 Full Alembic configuration and migration setup included.
 Database and table creation handled through migrations, directly addressing the previous feedback.

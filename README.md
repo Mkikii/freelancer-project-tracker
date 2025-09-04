@@ -46,7 +46,9 @@ Run the main script to start the application and access its commands.
 ```bash
 python main.py
 
+
 Available Commands
+
 Add a New Client: python main.py add-client
 
 List All Clients: python main.py list-clients
@@ -64,6 +66,7 @@ Generate Earnings Report: python main.py earnings-report
 Seed Database: python main.py seed
 
 Project Structure
+
 Plaintext
 
 freelancer-tracker/
@@ -84,35 +87,8 @@ freelancer-tracker/
 ├── README.md
 └── .gitignore
 
-Technical Features and Grading Criteria
-
-This section outlines how the project meets the technical requirements for grading.
-
-Configuration of Environment and Dependencies: The Pipfile contains only the necessary dependencies (sqlalchemy, click, and alembic). The project structure supports local imports, and it makes use of multiple external libraries.
-
-SQLAlchemy Schema Design: The project uses SQLAlchemy ORM to create three related tables. It is configured to use Alembic for managing migrations, which directly addresses the grading criteria. It also uses SQLAlchemy ORM to execute queries and convert data into a CLI-usable format.
-
-Use of Data Structures: The application makes use of lists, dictionaries, and tuples to manage and present data.
-
-Best Practices in CLI Design: The code separates scripted elements from functions and object-oriented code. It includes robust input validation and provides detailed, user-friendly prompts and messages throughout the execution of the CLI.
-
-Documentation: A comprehensive README.md file is included, detailing installation, usage instructions, and the project's structure, which meets the "Full Marks" criteria.
-
-Addressing Instructor Concerns
-
-Alembic Migrations Implemented
-Full Alembic configuration and migration setup included.
-Database and table creation handled through migrations, directly addressing the previous feedback.
-
-Seed Data Provided
-seed.py includes comprehensive sample data.
-Sample clients, projects, and time entries are pre-populated.
-
- Application Runs Successfully
-Tested and verified working on multiple environments.
-Clear error handling and user feedback.
-
 Author
+
 Name: Maureen W Karimi
 
 GitHub: Mkikii

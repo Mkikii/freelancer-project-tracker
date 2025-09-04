@@ -1,51 +1,52 @@
 Freelancer Project & Time Tracker
-A comprehensive command-line application for freelancers to manage clients, projects, and track time worked with earnings reporting capabilities.
+A comprehensive command-line application for freelancers to manage clients, projects, and track time with earnings reports.
 
 Description
-Freelancer Project & Time Tracker is a CLI application designed to help freelancers manage their business operations efficiently. The application provides functionality for tracking clients, managing projects, logging work hours, and generating earnings reports. Built with Python, SQLAlchemy ORM, and Click for the CLI interface, it demonstrates modern database management and command-line application development.
+The Freelancer Project & Time Tracker is a CLI application designed to help freelancers manage their business operations. It provides functionality for tracking clients, managing projects, logging work hours, and generating earnings reports. The application is built with Python, SQLAlchemy ORM, and the Click library.
 
 Features
-Client Management: Create, view, and manage client profiles with contact information and hourly rates
+Client Management: Create, view, and manage client profiles with contact information and hourly rates.
 
-Project Management: Create projects linked to specific clients with custom rates and statuses
+Project Management: Create projects linked to specific clients with custom rates and statuses.
 
-Time Tracking: Log hours worked on projects with descriptions and task types
+Time Tracking: Log hours worked on projects with descriptions and task types.
 
-Earnings Reporting: Generate comprehensive earnings reports by client and project
+Earnings Reporting: Generate comprehensive earnings reports by client and project.
 
-CRUD Operations: Full Create, Read, Update, and Delete functionality for all entities
+CRUD Operations: Full Create, Read, Update, and Delete functionality for all entities.
 
-Data Validation: Comprehensive input validation with proper error handling
+Data Validation: Comprehensive input validation with proper error handling.
 
-SQLite Database: Lightweight and efficient database storage
+SQLite Database: A lightweight database for data storage.
 
-User-Friendly CLI: Intuitive command-line interface with clear prompts
+User-Friendly CLI: An intuitive command-line interface with clear prompts.
 
 Technologies Used
-Python 3.8+: Core programming language
+Python 3.8+: The core programming language.
 
-SQLAlchemy: Object-Relational Mapping for database operations
+SQLAlchemy: An Object-Relational Mapper (ORM) for database operations.
 
-Click: Python package for creating command-line interfaces
+Click: A Python package for creating command-line interfaces.
 
-SQLite: Lightweight database engine for data persistence
+SQLite: A lightweight database engine for data persistence.
 
-DateTime: Python module for handling date and time operations
+DateTime: A Python module for handling date and time operations.
 
 Project Structure
-text
+Plaintext
+
 freelancer-tracker/
 ├── lib/
 │   ├── __init__.py
-│   ├── models.py          # Database models and schema
-│   ├── crud.py            # Database operations and CRUD functions
-│   ├── helpers.py         # Utility functions and validations
-│   └── seed.py            # Database seeding script
-├── main.py                # Main CLI application entry point
-├── Pipfile                # Pipenv dependency management
-├── Pipfile.lock           # Locked dependencies
-├── README.md              # Project documentation
-└── .gitignore            # Git ignore rules
+│   ├── models.py       # Database models and schema
+│   ├── crud.py         # Database operations and CRUD functions
+│   ├── helpers.py      # Utility functions and validations
+│   └── seed.py         # Database seeding script
+├── main.py             # Main CLI application entry point
+├── Pipfile             # Pipenv dependency management
+├── Pipfile.lock        # Locked dependencies
+├── README.md           # Project documentation
+└── .gitignore          # Git ignore rules
 Installation and Setup
 Prerequisites
 Python 3.8 or higher
@@ -55,148 +56,127 @@ pip (Python package manager)
 Installation Process
 Navigate to the project directory:
 
-bash
-cd freelancer-tracker
-Set up virtual environment using Pipenv:
+Bash
 
-bash
+cd freelancer-tracker
+Set up the virtual environment using Pipenv:
+
+Bash
+
 pipenv install
 pipenv shell
 Initialize the database:
 
-bash
+Bash
+
 python -c "from lib.models import Base, engine; Base.metadata.create_all(engine); print('Database created successfully!')"
 Seed the database with sample data:
 
-bash
-python -c "from lib.seed import seed_database; seed_database()"
-Run the application:
+Bash
 
-bash
-python main.py
+python -c "from lib.seed import seed_database; seed_database()"
 How to Use
 Starting the Application
 Run the main script to start the interactive CLI:
 
-bash
+Bash
+
 python main.py
 Available Commands
-add-client: Add a new client
+add-client: Add a new client.
 
-list-clients: List all clients
+list-clients: List all clients.
 
-add-project: Add a new project
+add-project: Add a new project.
 
-list-projects: List all projects
+list-projects: List all projects.
 
-add-time: Log time worked on a project
+add-time: Log time worked on a project.
 
-list-time: List time entries
+list-time: List time entries.
 
-earnings-report: Generate earnings report
+earnings-report: Generate an earnings report.
 
-seed: Seed database with sample data
+seed: Seed the database with sample data.
 
-Examples
-Add a new client:
-
-bash
-python main.py add-client
-Add a new project:
-
-bash
-python main.py add-project
-Log time worked:
-
-bash
-python main.py add-time
-Generate earnings report:
-
-bash
-python main.py earnings-report
 Database Schema
 Key Tables
 Clients Table
 
-id, name, email, company, phone, hourly_rate, created_at
+Columns: id, name, email, company, phone, hourly_rate, created_at
 
-Relationships with Projects
+Relationships: Linked to Projects.
 
 Projects Table
 
-id, name, description, client_id, hourly_rate, status, deadline, created_at
+Columns: id, name, description, client_id, hourly_rate, status, deadline, created_at
 
-Relationships with Clients and TimeEntries
+Relationships: Linked to Clients and TimeEntries.
 
 TimeEntries Table
 
-id, project_id, date_worked, hours, description, task_type, created_at
+Columns: id, project_id, date_worked, hours, description, task_type, created_at
 
-Relationships with Projects
+Relationships: Linked to Projects.
 
 API Reference (CRUD Functions)
-Client Operations (lib/crud.py)
-create_client() - Create new client profile
+These functions are located in lib/crud.py and handle database operations.
 
-get_all_clients() - Retrieve all clients
+Client Operations
+create_client(): Create a new client profile.
 
-get_client_by_id() - Get client by ID
+get_all_clients(): Retrieve all clients.
+
+get_client_by_id(): Get a client by their ID.
 
 Project Operations
-create_project() - Create new project
+create_project(): Create a new project.
 
-get_all_projects() - Retrieve all projects
+get_all_projects(): Retrieve all projects.
 
-get_projects_by_client() - Get projects by client ID
+get_projects_by_client(): Get projects by client ID.
 
 Time Entry Operations
-log_time() - Create new time entry
+log_time(): Create a new time entry.
 
-get_time_entries() - Retrieve time entries
+get_time_entries(): Retrieve time entries.
 
-get_earnings_report() - Generate earnings report
+get_earnings_report(): Generate an earnings report.
 
 Development
 Adding New Features
-Update models in lib/models.py
+To add new functionality, follow these steps:
 
-Add CRUD operations in lib/crud.py
+Update the database models in lib/models.py.
 
-Update CLI interface in main.py
+Add CRUD operations in lib/crud.py.
 
-Test thoroughly
+Update the CLI interface in main.py.
+
+Test your new feature thoroughly.
 
 Common Issues and Solutions
-Module Import Issues
+Module Import Issues: Ensure you're using the correct import syntax, like from lib import crud, models or from lib.crud import create_client.
 
-python
-# Correct import syntax
-from lib import crud, models
-# or
-from lib.crud import create_client
-Database Issues
+Database Issues: To reset the database, delete the existing file and recreate it:
 
-bash
-# Recreate database
+Bash
+
 rm freelancer.db
 python -c "from lib.models import Base, engine; Base.metadata.create_all(engine)"
 python -c "from lib.seed import seed_database; seed_database()"
-Virtual Environment Issues
+Virtual Environment Issues: If your virtual environment is corrupted, you can recreate it:
 
-bash
-# Recreate virtual environment
+Bash
+
 pipenv --rm
 pipenv install
 pipenv shell
-Support and Contact Details
+Support and Contact
 If you have any questions or need assistance, please contact:
 
 Maureen W Karimi
-
-maureen.karimi@student.moringaschool.com
+Email: maureen.karimi@student.moringaschool.com
 
 License
 This project is licensed under the MIT License.
-
-If you find this project useful, please give it a star on GitHub!
-

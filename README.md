@@ -17,8 +17,8 @@ A command-line application that helps freelancers manage their business operatio
 1.  **Clone the Repository**
     Navigate to your desired directory and clone the repository.
     ```bash
-    git clone <your-repository-url>
-    cd freelancer-tracker
+    git clone [https://github.com/Mkikii/freelancer-project-tracker](https://github.com/Mkikii/freelancer-project-tracker)
+    cd freelancer-project-tracker
     ```
 2.  **Set Up Virtual Environment and Dependencies**
     Use `pipenv` to install the project dependencies.
@@ -34,7 +34,7 @@ A command-line application that helps freelancers manage their business operatio
 4.  **Seed the Database with Sample Data**
     Run the seeding script to populate the database with sample data. This is essential for testing the application's reporting features.
     ```bash
-    python -c "from lib.seed import seed_database; seed_database()"
+    python main.py seed
     ```
 
 ---
@@ -97,7 +97,6 @@ Best Practices in CLI Design: The code separates scripted elements from function
 Documentation: A comprehensive README.md file is included, detailing installation, usage instructions, and the project's structure, which meets the "Full Marks" criteria.
 
 Addressing Instructor Concerns
-
 Alembic Migrations Implemented
 Full Alembic configuration and migration setup included.
 Database and table creation handled through migrations, directly addressing the previous feedback.
@@ -106,7 +105,7 @@ Seed Data Provided
 seed.py includes comprehensive sample data.
 Sample clients, projects, and time entries are pre-populated.
 
-Application Runs Successfully
+ Application Runs Successfully
 Tested and verified working on multiple environments.
 Clear error handling and user feedback.
 

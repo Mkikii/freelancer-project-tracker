@@ -1,24 +1,27 @@
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-.venv/
-freelancer_env/
+# Database
 *.db
 *.sqlite
-*.sqlite3
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.env
+.venv
+venv/
+ENV/
+
+# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
+# OS
 .DS_Store
 Thumbs.db
 
-dist/
-build/
-*.egg-info/
+# Alembic
+/alembic.ini
+/migrations/

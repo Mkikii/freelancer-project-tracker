@@ -1,18 +1,14 @@
-from models import Client, Project, TimeEntry, Session
+from sqlalchemy.orm import joinedload
+from lib.models import Session, Client, Project, TimeEntry
 from datetime import datetime
 
-def create_client(name, email, phone, company, rate):
+def create_client(name, email, company, phone, hourly_rate):
     session = Session()
-    try:
-        client = Client(name=name, email=email, phone=phone, company=company, hourly_rate=rate)
-        session.add(client)
-        session.commit()
-        return f"Added client: {name}"
-    except:
-        session.rollback()
-        return "Error: Client may already exist"
-    finally:
-        session.close()
+    client = Client(name=name, email=email, company=company, phone=phone, hourly_rate=hourly_rate)
+    session.add(client)
+    session.commit()
+    session.close()
+    return f"Client {name} created successfully"
 
 def get_all_clients():
     session = Session()
@@ -20,78 +16,91 @@ def get_all_clients():
     session.close()
     return clients
 
-def create_project(name, client_id, rate, deadline):
+def get_client_by_id(client_id):
     session = Session()
-    client = session.query(Client).filter_by(id=client_id).first()
-    if not client:
-        session.close()
-        return "Error: Client not found"
-    deadline_date = None
-    if deadline:
-        try:
-            deadline_date = datetime.strptime(deadline, '%Y-%m-%d')
-        except:
-            session.close()
-            return "Error: Invalid date format"
-    try:
-        project = Project(name=name, client_id=client_id, project_rate=rate, deadline=deadline_date)
-        session.add(project)
-        session.commit()
-        return f"Added project: {name} for {client.name}"
-    except:
-        session.rollback()
-        return "Error adding project"
-    finally:
-        session.close()
+    client = session.query(Client).filter(Client.id == client_id).first()
+    session.close()
+    return client
+
+def create_project(name, client_id, description, hourly_rate, status, deadline):
+    session = Session()
+    project = Project(
+        name=name, 
+        client_id=client_id, 
+        description=description, 
+        hourly_rate=hourly_rate,
+        status=status,
+        deadline=deadline
+    )
+    session.add(project)
+    session.commit()
+    session.close()
+    return f"Project {name} created successfully"
 
 def get_all_projects():
     session = Session()
-    projects = session.query(Project).all()
+    projects = session.query(Project).options(joinedload(Project.client)).all()
     session.close()
     return projects
 
-def log_time(description, hours, client_id, project_id):
+def get_projects_by_client(client_id):
     session = Session()
-    client = session.query(Client).filter_by(id=client_id).first()
-    project = session.query(Project).filter_by(id=project_id).first()
-    if not client or not project:
-        session.close()
-        return "Error: Client or Project not found"
-    try:
-        time_entry = TimeEntry(description=description, hours=hours, client_id=client_id, project_id=project_id)
-        session.add(time_entry)
-        session.commit()
-        rate = project.project_rate or client.hourly_rate
-        earnings = hours * rate
-        return f"Logged {hours} hours - ${earnings:.2f} earned"
-    except:
-        session.rollback()
-        return "Error logging time"
-    finally:
-        session.close()
+    projects = session.query(Project).filter(Project.client_id == client_id).all()
+    session.close()
+    return projects
 
-def generate_time_report(client_id=None, project_id=None):
+def log_time(project_id, hours, description, task_type, date_worked):
     session = Session()
-    query = session.query(TimeEntry)
-    if client_id:
-        query = query.filter_by(client_id=client_id)
+    time_entry = TimeEntry(
+        project_id=project_id, 
+        hours=hours, 
+        description=description,
+        task_type=task_type,
+        date_worked=date_worked
+    )
+    session.add(time_entry)
+    session.commit()
+    session.close()
+    return f"Time logged successfully: {hours} hours"
+
+def get_time_entries(project_id=None):
+    session = Session()
     if project_id:
-        query = query.filter_by(project_id=project_id)
-    time_entries = query.all()
+        entries = session.query(TimeEntry).options(joinedload(TimeEntry.project)).filter(TimeEntry.project_id == project_id).all()
+    else:
+        entries = session.query(TimeEntry).options(joinedload(TimeEntry.project)).all()
     session.close()
-    return time_entries
+    return entries
 
-def generate_earnings_report(client_id=None, start_date=None, end_date=None):
+def get_earnings_report(client_id=None):
     session = Session()
-    query = session.query(TimeEntry)
+    
     if client_id:
-        query = query.filter_by(client_id=client_id)
-    if start_date:
-        start = datetime.strptime(start_date, '%Y-%m-%d')
-        query = query.filter(TimeEntry.date >= start)
-    if end_date:
-        end = datetime.strptime(end_date, '%Y-%m-%d')
-        query = query.filter(TimeEntry.date <= end)
-    time_entries = query.all()
+        projects = session.query(Project).options(joinedload(Project.client)).filter(Project.client_id == client_id).all()
+    else:
+        projects = session.query(Project).options(joinedload(Project.client)).all()
+    
+    report_data = []
+    total_earnings = 0
+    total_hours = 0
+    
+    for project in projects:
+        project_hours = sum(entry.hours for entry in project.time_entries)
+        project_earnings = project_hours * project.hourly_rate
+        total_hours += project_hours
+        total_earnings += project_earnings
+        
+        report_data.append({
+            'project_name': project.name,
+            'client_name': project.client.name,
+            'hours': project_hours,
+            'earnings': project_earnings
+        })
+    
     session.close()
-    return time_entries
+    
+    return {
+        'entries': report_data,
+        'total_hours': total_hours,
+        'total_earnings': total_earnings
+    }

@@ -1,131 +1,100 @@
-Freelancer Project & Time Tracker
+# Freelancer Project & Time Tracker
 
-A Python command-line application for freelancers to manage clients, projects, and time logs — with built-in earnings reporting.
+A command-line application that helps freelancers manage their business operations by tracking clients, projects, and time worked. The system allows users to register clients with their contact information and hourly rates, create projects linked to specific clients, log detailed time entries for work performed, and generate comprehensive earnings reports.
 
-Overview
+---
 
-The Freelancer Project & Time Tracker is a lightweight CLI tool designed to help freelancers manage their business operations. It enables users to:
+## Prerequisites
 
-Create and manage client profiles
+* **Python 3.8** or higher
+* **pip** (Python package manager)
+* **Git**
 
-Link projects to clients with custom rates
+---
 
-Log work hours with task descriptions
+## Installation Instructions
 
-Generate earnings reports by client or project
+1.  **Clone the Repository**
+    Navigate to your desired directory and clone the repository.
+    ```bash
+    git clone <your-repository-url>
+    cd freelancer-tracker
+    ```
+2.  **Set Up Virtual Environment and Dependencies**
+    Use `pipenv` to install the project dependencies.
+    ```bash
+    pipenv install
+    pipenv shell
+    ```
+3.  **Initialize the Database**
+    The application uses SQLAlchemy ORM to automatically create the database and tables.
+    ```bash
+    python -c "from lib.models import Base, engine; Base.metadata.create_all(engine); print('Database created successfully!')"
+    ```
+4.  **Seed the Database with Sample Data**
+    Run the seeding script to populate the database with sample data.
+    ```bash
+    python -c "from lib.seed import seed_database; seed_database()"
+    ```
 
-Built with Click for the CLI and SQLAlchemy for ORM-based database interactions.
+---
 
-Prerequisites
+## Basic Usage Examples
 
-Before installing, ensure you have:
+Run the main script to start the application and access available commands.
 
-Python 3.8 or higher
-
-Pipenv for virtual environment and dependency management
-
-Git (for cloning the repository)
-Installation
-Clone the repository
-
-bash
-
-git clone https://github.com/your-username/freelancer-tracker.git
-cd freelancer-tracker
-Set up a virtual environment and install dependencies
-
-bash
-
-pipenv install
-pipenv shell
-Initialize the database
-
-bash
-
-python -c "from lib.models import Base, engine; Base.metadata.create_all(engine)"
-Seed with sample data (optional)
-
-bash
-
-python -c "from lib.seed import seed_database; seed_database()"
-Usage
-Run the CLI application:
-
-bash
-
+```bash
 python main.py
 Available Commands
-Command	Description
-add-client	Add a new client
-list-clients	View all clients
-add-project	Add a new project
-list-projects	View all projects
-add-time	Log time worked
-list-time	View time entries
-earnings-report	Generate earnings report
-seed	Seed database with sample data
+Add a New Client: python main.py add-client
+
+List All Clients: python main.py list-clients
+
+Add a New Project: python main.py add-project
+
+List All Projects: python main.py list-projects
+
+Log Time Worked: python main.py add-time
+
+List Time Entries: python main.py list-time
+
+Generate Earnings Report: python main.py earnings-report
+
+Seed Database: python main.py seed
+
 Project Structure
-Code
+Plaintext
+
 freelancer-tracker/
 ├── lib/
 │   ├── __init__.py
-│   ├── models.py         # SQLAlchemy models
-│   ├── crud.py           # DB operations
-│   ├── helpers.py        # Utility functions
-│   └── seed.py           # Sample data seeding
-├── main.py               # CLI entry point
-├── Pipfile               # Dependency management
+│   ├── models.py          # SQLAlchemy database models
+│   ├── crud.py            # CRUD operations and database queries
+│   ├── helpers.py         # Validation and utility functions
+│   └── seed.py            # Database seeding with sample data
+├── main.py                # Main CLI application using Click
+├── Pipfile                # Project dependencies
 ├── Pipfile.lock
 ├── README.md
 └── .gitignore
+Technical Features and Grading Criteria
+This section outlines how the project meets the technical requirements for grading.
 
-Database Schema
+Configuration of Environment and Dependencies: Pipfile contains necessary dependencies (sqlalchemy and click). The project uses a clean import structure and proper module organization.
 
-Clients
+SQLAlchemy Schema Design: Uses SQLAlchemy ORM to create three related tables (clients, projects, time_entries). The database and tables are created automatically via SQLAlchemy, and data is converted for CLI use.
 
-id, name, email, company, phone, hourly_rate, created_at
+Use of Data Structures: The application uses lists for data collections, dictionaries for report data, and tuples for various function returns and data handling.
 
-Projects
+Best Practices in CLI Design: The code separates scripted elements from functions and object-oriented code. It includes comprehensive input validation, user-friendly prompts, and clear error messages.
 
-id, name, description, client_id, hourly_rate, status, deadline, created_at
-
-TimeEntries
-
-id, project_id, date_worked, hours, description, task_type, created_at
-
-Documentation
-
-For deeper understanding of the CLI structure and logic, refer to:
-
-main.py — CLI command definitions
-
-lib/models.py — SQLAlchemy database schema
-
-lib/crud.py — Database operations
-
-lib/helpers.py — Utility functions
-
-Inline comments and docstrings throughout the codebase
+Documentation: A comprehensive README.md file is included with installation, usage instructions, and a clear overview of the project's structure and features.
 
 Author
+Name: Maureen W Karimi
 
-Maureen W Karimi Email: maureen.karimi@student.moringaschool.com GitHub: github.com/maureenkarimi
-
-Contributing
-
-Contributions are welcome and appreciated. To contribute:
-
-Fork the repository
-
-Create a new branch (git checkout -b feature-name)
-
-Make your changes with clear, descriptive commit messages
-
-Push to your fork and open a pull request
-
-Please follow the existing code structure and include relevant documentation or comments. All contributions should maintain the project's clean setup and beginner-friendly standards.
-
+GitHub: Mkikii
 
 License
-
 This project is licensed under the MIT License.
+

@@ -85,6 +85,7 @@ freelancer-tracker/
 └── .gitignore
 
 Technical Features and Grading Criteria
+
 This section outlines how the project meets the technical requirements for grading.
 
 Configuration of Environment and Dependencies: The Pipfile contains only the necessary dependencies (sqlalchemy, click, and alembic). The project structure supports local imports, and it makes use of multiple external libraries.

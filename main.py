@@ -5,7 +5,7 @@ from lib.crud import (
     create_project, get_all_projects, get_projects_by_client,
     log_time, get_time_entries, get_earnings_report
 )
-from lib.helpers import validate_email, validate_date, parse_date, format_currency, format_date
+from lib.helpers import validate_email, validate_phone, validate_date, parse_date, format_currency, format_date
 from lib.seed import seed_database
 
 @click.group()
@@ -16,11 +16,15 @@ def cli():
 @click.option('--name', prompt='Client name')
 @click.option('--email', prompt='Client email')
 @click.option('--company', prompt='Company (optional)', default='')
-@click.option('--phone', prompt='Phone (optional)', default='')
+@click.option('--phone', prompt='Phone (optional, format: 07XXXXXXXX)', default='')
 @click.option('--rate', prompt='Hourly rate', type=float)
 def add_client(name, email, company, phone, rate):
     if not validate_email(email):
         click.echo("Error: Invalid email format")
+        return
+        
+    if not validate_phone(phone):
+        click.echo("Error: Invalid phone format. Must start with 07 and be 10 digits (e.g., 0712345678).")
         return
         
     result = create_client(name, email, company, phone, rate)

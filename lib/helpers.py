@@ -7,7 +7,9 @@ def validate_email(email):
     return re.match(pattern, email) is not None
 
 def validate_phone(phone):
-    pattern = r'^[\d\s\-\+\(\)]{10,}$'
+    if not phone:
+        return True
+    pattern = r'^07\d{8}$'
     return re.match(pattern, phone) is not None
 
 def validate_date(date_string):
@@ -55,6 +57,7 @@ def get_client_summary():
             'name': client.name,
             'email': client.email,
             'company': client.company,
+            'phone': client.phone,
             'hourly_rate': client.hourly_rate,
             'projects_count': total_projects,
             'total_hours': total_hours,

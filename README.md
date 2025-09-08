@@ -89,7 +89,7 @@ freelancer-tracker/
 
 Author
 
-Name: Maureen W Karimi
+Name: Maureen K 
 
 GitHub: Mkikii
 
